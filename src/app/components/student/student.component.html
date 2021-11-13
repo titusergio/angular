@@ -1,0 +1,109 @@
+<div class="row" *ngIf="!studentService.subject; else main_content">
+  <h3>Please await until we load information about the subject... </h3>
+</div>
+<ng-template #main_content>
+
+
+
+<div class="container">
+  <div class="row">
+
+  
+
+  <div class="col-md-8 mt-4 ">
+    <h3>Students of: {{getName()}}</h3>
+    <div *ngFor="let student of studentService.students">
+      <div  *ngFor="let id of studentService.subject.students">
+        <div *ngIf="student._id ===id">
+
+      
+          <table class="table table-striped mt-3">
+            <thead>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Year of course</th>
+              <th>Age</th>
+              <th>Options</th>
+            </thead>  
+            <tbody>
+
+              <tr>
+                                                
+                <td>{{ student.name }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.year }}</td>
+                  <td>{{ student.age }}</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="editStudent(student)">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteStudent(student._id)">Delete</button>
+                  </td>
+                        
+              </tr>
+                                               
+            </tbody>
+          
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-danger " (click)="show()">Delete</button>
+
+
+  </div>
+
+
+  
+  
+
+
+
+    <div class="col-md-3">
+      <div class="text-center" style="margin-bottom: 10px; margin-top: 10px;">
+        <h4>Add a student</h4>
+      </div>
+      <div class="card p-2">
+        <form #studentForm="ngForm" (ngSubmit)="newStudent(studentForm)">
+          <input type="hidden" name="id" [(ngModel)]="studentService.selectedStudent._id"  >
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" name="name" aria-describedby="nameHelp" [(ngModel)]="studentService.selectedStudent.name">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" aria-describedby="emailHelp" [(ngModel)]="studentService.selectedStudent.email" >
+          </div>
+          <div class="mb-3">
+            <label for="year" class="form-label">Year</label>
+            <input type="number" class="form-control" name="year" [(ngModel)]="studentService.selectedStudent.year" >
+          </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" name="age"  [(ngModel)]="studentService.selectedStudent.age" >
+          </div>
+          
+          
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+      
+           
+    </div>
+
+  </div>
+
+  
+
+</div>
+
+
+  
+
+           
+   
+  
+  
+    
+  
+    
